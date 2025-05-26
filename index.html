@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voting Ketua HMTE</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <img src="assets/logo-mdp.png" alt="Logo MDP" class="logo-mdp" />
+      <img src="assets/logo-hmte.png" alt="Logo HMTE" class="logo-hmte" />
+    </div>
+
+    <h1 class="title">Pemilihan Ketua</h1>
+    <h1 class="title">Himpunan Mahasiswa Teknik Elektro </h1>
+    <h1 class="title">2025/2026</h1>
+
+    <!-- Pilihan Login -->
+    <div id="login-options">
+      <button onclick="showLogin('pemilih')">Login Pemilih</button>
+      <button onclick="showLogin('panitia')">Login Panitia</button>
+    </div>
+
+    <!-- Form Login Pemilih -->
+    <div id="login-pemilih" class="login-form" style="display:none">
+      <input type="text" id="nama" placeholder="Nama Lengkap" />
+      <input type="text" id="npm" placeholder="NPM" />
+      <button onclick="loginPemilih()">Masuk & Memilih</button>
+    </div>
+
+    <!-- Form Login Panitia -->
+    <div id="login-panitia" class="login-form" style="display:none">
+      <input type="text" id="admin-user" placeholder="Username" />
+      <input type="password" id="admin-pass" placeholder="Password" />
+      <button onclick="loginPanitia()">Login Panitia</button>
+    </div>  
+
+    <div id="visimisi-popup" class="popup-overlay" style="display: none;">
+      <div class="popup-content" style="max-width: 600px;">
+        <span class="close-btn" onclick="closeVisiMisi()">×</span>
+        <img id="visimisi-img" src="" alt="Visi Misi" style="width: 100%; border-radius: 12px;" />
+       </div>
+    </div>
+
+
+    <!-- Tampilan Kandidat -->
+    <div class="grid" id="candidates" style="display:none">
+      <div class="card">
+        <div class="nomor">01</div>
+        <img src="assets/Iqrom.png" alt="Iqrom" />
+        <h2>M. Iqrom Januar D</h2>
+        <button onclick="showVisiMisi('iqrom')">Lihat Visi Misi</button>
+        <button onclick="prepareVote('M. Iqrom Januar D')">Pilih</button>
+      </div>
+      <div class="card">
+        <div class="nomor">02</div>
+        <img src="assets/Risky.png" alt="M. Risky Tri Saputra" />
+        <h2>M. Riski Tri Saputra</h2>
+        <button onclick="showVisiMisi('riski')">Lihat Visi Misi</button>
+        <button onclick="prepareVote('M. Risky Tri Saputra')">Pilih</button>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div id="status"></div>
+
+    <!-- Hasil untuk Panitia -->
+    <div id="results-tab" style="display:none">
+      <h2>Hasil Pemilihan</h2>
+      <canvas id="chart"></canvas>
+      <h3 style="margin-top:30px;">Riwayat Pemilih</h3>
+      <table id="history-table">
+        <thead>
+          <tr><th>Nama</th><th>NPM</th><th>Waktu</th><th>Pilihan</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <button onclick="resetVoting()" class="reset-btn">Reset Voting</button>
+    </div>
+
+    <button id="logoutBtn" onclick="logout()" style="display:none">Logout</button>
+  </div>
+
+  <!-- Popup Persetujuan Sebelum Voting -->
+  <div id="popup" class="popup-overlay" style="display:none">
+    <div class="popup-content">
+      <h3>Persetujuan Pemilihan</h3>
+      <p>Dengan memilih, Anda setuju bahwa pilihan Anda akan direkam dan tidak dapat diubah.</p>
+      <p>Pastikan data Anda benar dan hanya memilih satu kali.</p>
+      <button onclick="confirmVote()">Setuju & Pilih</button>
+      <button onclick="closePopup()" class="cancel-btn">Batal</button>
+    </div>
+  </div>
+
+  <!-- Popup Terima Kasih Setelah Voting -->
+  <div id="thankyou" class="popup-overlay" style="display:none">
+    <div class="popup-content">
+      <h3>Terima Kasih!</h3>
+      <p>Suara Anda sudah tercatat.</p>
+      <button onclick="closeThankYou()">Tutup</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
